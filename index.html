@@ -11,8 +11,39 @@
         socket.on('disconnect', function (socket) {
             console.log('Disconnected');
         });
+
+        socket.on('message', function (message, callback) {
+            console.log(message);
+        });
+        socket.on('serverMessage', function(data){ 
+            console.log(data); 
+        });
+
     </script>
     <center>
     <h1>Test Page</h1>
+    <div id="buttons">
+        <button class="button" id="begin">Begin</button>
+        <button class="button" id="update">Update</button>
+        <button class="button" id="end">End</button>
+    </div>
+    <div id="ride-data">
+        <input type="text" placeholder="lng" name="lng"/>
+        <input type="text" placeholder="lat" name="lat"/>
+        <input type="text" placeholder="fare"/>
+    </div>
     </center>
+    <script type="text/javascript" src="public/bower_components/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('button.button').click(function(e){
+            e.preventDefault();
+            var rideEvent = $(e.target).attr('id'),
+                lng = $('input[name$="lng"'),
+                lat = $('input[name$="lat"');
+
+            socket.emit('rideEvent', { "event": rideEvent, "lng": lng, "lat": lat });
+        })
+    });
+    </script>
 </html>

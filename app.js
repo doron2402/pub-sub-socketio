@@ -14,11 +14,20 @@ connect.createServer(
 app.listen(port);
 
 sub.subscribe('Pub');//subscribe to Pub channel
-sub.on('message', function (channel, message) {
-    console.log(channel + ':' + message);
-});
+
 
 io.sockets.on('connection', function (socket) {
+
+	sub.on('message', function (channel, message) {
+		socket.emit('serverMessage', message);
+    	console.log(channel + ':' + message);
+    	console.log('that\'s the message:' + message);
+	});
+
+	socket.on('rideEvent', function(args){
+		console.log(args);
+	});
+	
     pub.publish('Pub', 'New Connection');
     pub.incr('Channel Test');   //increment 'Channel Test' but do not publish messages
     pub.incr('Pub');            //increment 'Pub' but do not publish messages
