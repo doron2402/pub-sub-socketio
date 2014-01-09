@@ -26,8 +26,19 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('rideEvent', function(args){
 		console.log(args);
+		switch (args.event){
+			case 'begin':
+				pub.publish('Pub', 'begin: [' + args.lat +',' + args.lng +']');
+				break;
+			case 'end':
+				pub.publish('Pub', 'end: [' + args.lat +',' + args.lng +']');
+				break;
+			case 'update':
+				pub.publish('Pub', 'update: [' + args.lat +',' + args.lng +']');
+				break;
+		}
 	});
-	
+
     pub.publish('Pub', 'New Connection');
     pub.incr('Channel Test');   //increment 'Channel Test' but do not publish messages
     pub.incr('Pub');            //increment 'Pub' but do not publish messages

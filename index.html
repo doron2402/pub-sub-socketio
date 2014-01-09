@@ -39,10 +39,16 @@
         $('button.button').click(function(e){
             e.preventDefault();
             var rideEvent = $(e.target).attr('id'),
-                lng = $('input[name$="lng"'),
-                lat = $('input[name$="lat"');
+                lng = $('[name="lng"]').val(),
+                lat = $('[name="lat"]').val();
 
-            socket.emit('rideEvent', { "event": rideEvent, "lng": lng, "lat": lat });
+            if (lat !== '' && lng !== ''){
+                socket.emit('rideEvent', { 
+                "event": rideEvent, 
+                "lng": lng,
+                "lat": lat });    
+            }
+            
         })
     });
     </script>
