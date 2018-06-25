@@ -4,7 +4,9 @@
   "description": "node.js app using redis pub/sub and Socket.IO",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -27,7 +29,9 @@
   "dependencies": {
     "redis": "~0.10.0",
     "socket.io": "~0.9.16",
-    "connect": "~2.12.0",
-    "bower": "~1.2.8"
-  }
+    "connect": "~2.14.0",
+    "bower": "~1.7.5",
+    "snyk": "^1.85.0"
+  },
+  "snyk": true
 }
